@@ -11,7 +11,6 @@ namespace DataAccess.Concrete.InMemory
     public class InMemoryCarDal : ICarDal
     {
         List<Car> _cars;
-
         public InMemoryCarDal()
         {
             _cars = new List<Car>
@@ -32,23 +31,30 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carDelete = _cars.SingleOrDefault(p => p.Id == car.Id);
-            _cars.Remove(carDelete);
+            Car deletedCar = _cars.SingleOrDefault(c => c.Id == car.Id);
+            _cars.Remove(deletedCar);
         }
 
         public List<Car> GetAll()
         {
-            throw new NotImplementedException();
+            return _cars;
         }
 
-        public Car GetById(Car car)
+        public Car GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _cars.SingleOrDefault(c => c.Id == Id);
+            
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
+            carToUpdate.Id = car.Id;
+            carToUpdate.ModelYear = car.ModelYear;
+            carToUpdate.ColorId = car.ColorId;
+            carToUpdate.DailyPrice = car.DailyPrice;
+            carToUpdate.Description = car.Description;
+
         }
     }
 }
