@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,12 +21,18 @@ namespace DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public List<Car> GetAll()
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (RentaCarContext context = new RentaCarContext())
+            {
+                return filter == null
+                    ? context.Set<Car>().ToList()
+                    : context.Set<Car>().Where(filter).ToList();
+            }
         }
 
-        public Car GetById(int Id)
+
+        public Car GetById(Expression<Func<Car, bool>> filter)
         {
             throw new NotImplementedException();
         }
