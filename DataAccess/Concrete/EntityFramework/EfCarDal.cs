@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,12 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            throw new NotImplementedException();
+            using (RentaCarContext context = new RentaCarContext())
+            {
+                var addedEntity = context.Entry(entity);
+                addedEntity.State=EntityState.Added;
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Car entity)
