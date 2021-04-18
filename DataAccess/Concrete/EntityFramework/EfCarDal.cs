@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,43 +12,20 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, RentaCarContext>, ICarDal
     {
-        public void Add(Car entity)
+        public List<CarDetailDto> GetCarDetails()
         {
-            using (RentaCarContext context = new RentaCarContext())
+            using(RentaCarContext context = new RentaCarContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State=EntityState.Added;
-                context.SaveChanges();
+                var result = from p in context.Cars
+                             join c in context.Brands
+                             on p.BrandId equals c.BrandId 
+                             join t in context.Colors 
+                             on p.ColorId equals t.ColorId
+                             select new CarDetailDto { CarId = p.CarId, CarName = p.CarName, BrandName = c.BrandName, ColorName=t.ColorName, DailyPrice = p.DailyPrice };
+                return result.ToList();
             }
-        }
-
-        public void Delete(Car entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (RentaCarContext context = new RentaCarContext())
-            {
-                return filter == null
-                    ? context.Set<Car>().ToList()
-                    : context.Set<Car>().Where(filter).ToList();
-
-            }
-        }
-
-
-        public Car GetById(Expression<Func<Car, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Car entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }
