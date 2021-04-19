@@ -9,7 +9,13 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CetCarsByColorId();
-            CetCarDetails();
+            //CetCarDetails();
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+
+            foreach (var color in colorManager.GetAll())
+            {
+
+            }
 
         }
 
