@@ -37,6 +37,11 @@ namespace Business.Concrete
             _carDal.Delete(car);
         }
 
+        public Car GetCarById(int id)
+        {
+            return _carDal.Get(c => c.CarId==id);
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();

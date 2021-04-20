@@ -22,9 +22,18 @@ namespace Business.Concrete
             _colorDal.Add(color);
         }
 
+        public void Update(Color color)
+        {
+            _colorDal.Update(color);
+        }
+
         public void Delete(Color color)
         {
             _colorDal.Delete(color);
+        }
+        public Color GetColorById(int id)
+        {
+            return _colorDal.Get(c => c.ColorId == id);
         }
 
         public List<Color> GetAll()
@@ -32,9 +41,5 @@ namespace Business.Concrete
             return _colorDal.GetAll();
         }
 
-        public void Update(Color color)
-        {
-            _colorDal.Update(color);
-        }
     }
 }

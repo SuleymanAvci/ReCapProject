@@ -8,11 +8,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CetCarsByColorId();
+            CetCarsByColorId();
             //CetCarDetails();
             //ColorGetAll();
 
-            BrandManager brandManager = new BrandManager()
 
 
         }
@@ -39,7 +38,7 @@ namespace ConsoleUI
         private static void CetCarsByColorId()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByColorId(1002))
+            foreach (var car in carManager.GetCarsByColorId(1001))
             {
                 Console.WriteLine(car.CarName);
             }
