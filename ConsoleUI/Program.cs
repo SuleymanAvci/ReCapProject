@@ -10,13 +10,21 @@ namespace ConsoleUI
         {
             //CetCarsByColorId();
             //CetCarDetails();
+            //ColorGetAll();
+
+            BrandManager brandManager = new BrandManager()
+
+
+        }
+
+        private static void ColorGetAll()
+        {
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
             foreach (var color in colorManager.GetAll())
             {
-
+                Console.WriteLine(color.ColorName);
             }
-
         }
 
         private static void CetCarDetails()
