@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -17,29 +19,54 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public void Add(Color color)
+
+        public IResult Add(Color color)
         {
+            if (color.ColorName.Length < 2)
+            {
+                return new ErrorResult(Messages.ColorNameInvalid);
+            }
             _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
-        public void Update(Color color)
+        public IResult Update(Color color)
         {
+            if (color.ColorName.Length < 1)
+            {
+                return new ErrorResult(Messages.ColorNameInvalid);
+            }
             _colorDal.Update(color);
+            return new SuccessResult("Ürün güncellendi");
         }
 
-        public void Delete(Color color)
+
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-        }
-        public Color GetColorById(int id)
-        {
-            return _colorDal.Get(c => c.ColorId == id);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
-        public List<Color> GetAll()
+         public IDataResult<Color> GetColorById(int id)
         {
-            return _colorDal.GetAll();
+            if (_colorDal.Get(c => c.ColorId == id) != null)
+            {
+                return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
+            }
+            return new ErrorDataResult<Color>(Messages.UnitNotFound);
         }
+
+
+       public IDataResult<List<Color>> GetAll()
+        {
+            if (_colorDal.GetAll() == null)
+            {
+                return new ErrorDataResult<List<Color>>(Messages.UnitNotFound);
+            }
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
+        }
+
+
 
     }
 }

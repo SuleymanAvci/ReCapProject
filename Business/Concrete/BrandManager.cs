@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,30 +20,56 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
+            if (brand.BrandName.Length < 2)
+            {
+                return new ErrorResult(Messages.BrandNameInvalid);
+            }
             _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
         }
 
-        public void Update(Brand brand)
+
+        public IResult Update(Brand brand)
         {
+            if (brand.BrandName.Length < 1)
+            {
+                return new ErrorResult(Messages.BrandNameInvalid);
+            }
             _brandDal.Update(brand);
+            return new SuccessResult("Model güncellendi");
         }
 
-        public void Delete(Brand brand)
+
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-        }        
-        
-        public Brand GetBrandById(int id)
-        {
-            return _brandDal.Get(c => c.BrandId == id);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<Brand> GetBrandById(int id)
         {
-            return _brandDal.GetAll();
+            if (_brandDal.Get(c => c.BrandId == id) != null)
+            {
+                return new SuccessDataResult<Brand>(_brandDal.Get(c => c.BrandId == id));
+            }
+            return new ErrorDataResult<Brand>(Messages.UnitNotFound);
         }
+
+
+        public IDataResult<List<Brand>> GetAll()
+        {
+            if (_brandDal.GetAll() == null)
+            {
+                return new ErrorDataResult<List<Brand>>(Messages.UnitNotFound);
+            }
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+        }
+
+
+
+
 
     }
 }
