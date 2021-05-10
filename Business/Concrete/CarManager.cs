@@ -26,10 +26,10 @@ namespace Business.Concrete
         {
             if (car.CarName.Length<2)
             {
-                return new ErrorResult(Messages.CarNameInvalid);
+                return new ErrorResult(Messages.UnitNameInvalid);
             }            
             _carDal.Add(car);                
-            return new SuccessResult(Messages.CarAdded);
+            return new SuccessResult(Messages.UnitAdded);
         }
 
 
@@ -37,7 +37,7 @@ namespace Business.Concrete
         {
             if(car.CarName.Length<1)
             {
-                return new ErrorResult(Messages.CarNameInvalid);
+                return new ErrorResult(Messages.UnitNameInvalid);
             }
             _carDal.Update(car);
             return new SuccessResult("Ürün güncellendi");
@@ -47,7 +47,7 @@ namespace Business.Concrete
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new SuccessResult(Messages.CarDeleted);
+            return new SuccessResult(Messages.UnitDeleted);
         }
 
 

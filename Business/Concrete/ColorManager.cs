@@ -24,17 +24,17 @@ namespace Business.Concrete
         {
             if (color.ColorName.Length < 2)
             {
-                return new ErrorResult(Messages.ColorNameInvalid);
+                return new ErrorResult(Messages.UnitNameInvalid);
             }
             _colorDal.Add(color);
-            return new SuccessResult(Messages.ColorAdded);
+            return new SuccessResult(Messages.UnitAdded);
         }
 
         public IResult Update(Color color)
         {
             if (color.ColorName.Length < 1)
             {
-                return new ErrorResult(Messages.ColorNameInvalid);
+                return new ErrorResult(Messages.UnitNameInvalid);
             }
             _colorDal.Update(color);
             return new SuccessResult("Ürün güncellendi");
@@ -44,7 +44,7 @@ namespace Business.Concrete
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-            return new SuccessResult(Messages.ColorDeleted);
+            return new SuccessResult(Messages.UnitDeleted);
         }
 
          public IDataResult<Color> GetColorById(int id)
