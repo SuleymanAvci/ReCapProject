@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    class RentalManager : IRentalService
+    public class RentalManager : IRentalService
     {
 
         IRentalDal _rentalDal;
@@ -24,17 +24,18 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.Id < 0)
+            var result = _rentalDal.GetAll(c => c.RentalId == rental.RentalCarId && c.ReturnDate == null).ToList();
+            if (result.Count == 0)
             {
-                return new ErrorResult(Messages.UnitNameInvalid);
+                _rentalDal.Add(rental);
+                return new SuccessResult();
             }
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.UnitAdded);
+            return new ErrorResult();
         }
 
         public IResult Update(Rental rental)
         {
-            if (rental.Id < 0)
+            if (rental.RentalId < 0)
             {
                 return new ErrorResult(Messages.UnitNameInvalid);
             }
@@ -51,9 +52,9 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetRentalById(int id)
         {
-            if (_rentalDal.Get(c => c.Id == id) != null)
+            if (_rentalDal.Get(c => c.RentalId == id) != null)
             {
-                return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id));
+                return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.RentalId == id));
             }
             return new ErrorDataResult<Rental>(Messages.UnitNotFound);
         }

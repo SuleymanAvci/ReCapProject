@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    class CustomerManager : ICustomerService
+    public class CustomerManager : ICustomerService
     {
         ICustomerDal _customerDal;
 
@@ -52,9 +52,9 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetCustomerById(int id)
         {
-            if (_customerDal.Get(c => c.UserId == id) != null)
+            if (_customerDal.Get(c => c.CustomerId == id) != null)
             {
-                return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == id));
+                return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == id));
             }
             return new ErrorDataResult<Customer>(Messages.UnitNotFound);
         }

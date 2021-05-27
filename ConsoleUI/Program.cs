@@ -18,20 +18,33 @@ namespace ConsoleUI
 
             //GetCarDetailsTest();
             //GetCarsByBrandIdTest();
-            GetCarsByColorIdTest();
-
+            //GetCarsByColorIdTest();
             //CetCarsByColorId();
             //CetCarDetails();
             //ColorGetAll();
 
-            //CarListTest();
+            //***********************************************
+
+            //UserAddTest();
+            //CustomerAddTest();
 
 
-
+            RentalAddTest();
 
         }
 
+        private static void RentalAddTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
+            var result = rentalManager.Add(new Rental
+            {
+                RentalCarId = 1,
+                CustomerId = 1,
+                RentDate = new DateTime(2021 - 06 - 04),
+                ReturnDate = new DateTime(2021 - 06 - 06)
+            });
+        }
 
         private static void CarAddTest()
         {
@@ -137,6 +150,33 @@ namespace ConsoleUI
             }
         }
 
+        //****************************************************************************************
+
+
+        private static void UserAddTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.Add(new User { FirstName = "Süleyman", LastName = "AVCI", Email = "aa@cc", Password = "12345" });
+
+            Console.WriteLine(result.Message);
+        }
+
+
+        private static void CustomerAddTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.Add(new Customer { UserId = 1, CompanyName = "Dadal" });
+
+            if (result.Success)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
 
     }
 }
+      
