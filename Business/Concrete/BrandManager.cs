@@ -50,9 +50,9 @@ namespace Business.Concrete
 
         public IDataResult<Brand> GetBrandById(int id)
         {
-            if (_brandDal.Get(c => c.BrandId == id) != null)
+            if (_brandDal.Get(c => c.Id == id) != null)
             {
-                return new SuccessDataResult<Brand>(_brandDal.Get(c => c.BrandId == id));
+                return new SuccessDataResult<Brand>(_brandDal.Get(c => c.Id == id));
             }
             return new ErrorDataResult<Brand>(Messages.UnitNotFound);
         }

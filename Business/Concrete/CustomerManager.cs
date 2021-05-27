@@ -52,9 +52,9 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetCustomerById(int id)
         {
-            if (_customerDal.Get(c => c.CustomerId == id) != null)
+            if (_customerDal.Get(c => c.Id == id) != null)
             {
-                return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == id));
+                return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == id));
             }
             return new ErrorDataResult<Customer>(Messages.UnitNotFound);
         }

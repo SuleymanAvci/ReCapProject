@@ -49,9 +49,9 @@ namespace Business.Concrete
 
          public IDataResult<Color> GetColorById(int id)
         {
-            if (_colorDal.Get(c => c.ColorId == id) != null)
+            if (_colorDal.Get(c => c.Id == id) != null)
             {
-                return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
+                return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == id));
             }
             return new ErrorDataResult<Color>(Messages.UnitNotFound);
         }

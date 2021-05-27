@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            var result = _rentalDal.GetAll(c => c.RentalId == rental.RentalCarId && c.ReturnDate == null).ToList();
+            var result = _rentalDal.GetAll(c => c.RentalCarId == rental.RentalCarId && c.ReturnDate != null).ToList();
             if (result.Count == 0)
             {
                 _rentalDal.Add(rental);
@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            if (rental.RentalId < 0)
+            if (rental.Id < 0)
             {
                 return new ErrorResult(Messages.UnitNameInvalid);
             }
@@ -52,9 +52,9 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetRentalById(int id)
         {
-            if (_rentalDal.Get(c => c.RentalId == id) != null)
+            if (_rentalDal.Get(c => c.Id == id) != null)
             {
-                return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.RentalId == id));
+                return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id));
             }
             return new ErrorDataResult<Rental>(Messages.UnitNotFound);
         }

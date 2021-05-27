@@ -9,7 +9,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string UnitAdded ="Birm Eklendi";
+        public static string UnitAdded ="Birim Eklendi";
         public static string UnitNameInvalid = "Birim ismi geçersiz";
         public static string MaintananceTime = "Sistem bakım zamanı";
         public static string UnitListed = "Birimler Listelendi ";

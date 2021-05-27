@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarAddTest();
+            CarAddTest();
             //CarUpdateTest();
             //CarDeleteTest();            
             //GetCarByIdTest();
@@ -20,8 +20,7 @@ namespace ConsoleUI
             //GetCarsByBrandIdTest();
             //GetCarsByColorIdTest();
             //CetCarsByColorId();
-            //CetCarDetails();
-            //ColorGetAll();
+
 
             //***********************************************
 
@@ -29,7 +28,7 @@ namespace ConsoleUI
             //CustomerAddTest();
 
 
-            RentalAddTest();
+            //RentalAddTest();
 
         }
 
@@ -41,15 +40,15 @@ namespace ConsoleUI
             {
                 RentalCarId = 1,
                 CustomerId = 1,
-                RentDate = new DateTime(2021 - 06 - 04),
-                ReturnDate = new DateTime(2021 - 06 - 06)
+                RentDate = new DateTime(2021-06-04),
+                ReturnDate = new DateTime(2021-06-06)
             });
         }
 
         private static void CarAddTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.Add(new Car {CarName="eeee", ColorId=3, BrandId=4, DailyPrice=444, Description="uuuu", ModelYear="2001" });    
+            var result = carManager.Add(new Car {CarName="ttttt", ColorId=3, BrandId=4, DailyPrice=555, Description="uuuu", ModelYear="2001" });    
             
             Console.WriteLine(result.Message);
         }
@@ -58,7 +57,7 @@ namespace ConsoleUI
         private static void CarUpdateTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.Update(new Car { CarId = 25, CarName = "Mercedes ccc" });
+            var result = carManager.Update(new Car { Id = 25, CarName = "Mercedes ccc" });
 
             Console.WriteLine(result.Message);
         }
@@ -67,7 +66,7 @@ namespace ConsoleUI
         private static void CarDeleteTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.Delete(new Car { CarId = 1024 });
+            var result = carManager.Delete(new Car { Id = 1024 });
             
             if (result.Success)
             {

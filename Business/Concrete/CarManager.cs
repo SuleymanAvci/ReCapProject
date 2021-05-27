@@ -53,9 +53,9 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetCarById(int id)
         {
-            if (_carDal.Get(c => c.CarId == id) != null)
+            if (_carDal.Get(c => c.Id == id) != null)
             {
-                return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId==id));
+                return new SuccessDataResult<Car>(_carDal.Get(c => c.Id==id));
             }
             return new ErrorDataResult<Car>(Messages.UnitNotFound);
         }
