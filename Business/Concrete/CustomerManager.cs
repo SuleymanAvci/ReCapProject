@@ -69,8 +69,5 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
 
-
-
-
     }
 }
