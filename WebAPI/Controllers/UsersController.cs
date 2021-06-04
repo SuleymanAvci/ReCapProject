@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         IUserService _userService;
         public UsersController(IUserService userService)
         {
-
+            _userService = userService;
         }
 
         [HttpPost("add")]
