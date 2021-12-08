@@ -28,10 +28,6 @@ namespace Business.Concrete
         public IResult Add(Car car)
         {
             
-            if (car.CarName.Length<2)
-            {
-                return new ErrorResult(Messages.UnitNameInvalid);
-            }            
             _carDal.Add(car);                
             return new SuccessResult(Messages.UnitAdded);
         }
