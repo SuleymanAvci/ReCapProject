@@ -21,5 +21,6 @@ namespace Business.Constants
         public static string BrandLimitExceded = "Daha fazla marka ekleyemezsiniz";
         public static string CarImageLimitExceded = "Bir aracın en fazla 5 resmi olabilir";
         public static string ImageAddedMsg = "Resim başarıyla yüklendi";
+        public static string CarNameExists = "Bu Araç isminden vardır.";
     }
 }
